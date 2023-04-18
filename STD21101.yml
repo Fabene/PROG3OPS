@@ -1,0 +1,29 @@
+Parameters:
+  BucketName:
+    Type: String
+    Description: The name of the S3 bucket to create.
+
+Resources:
+  MyS3Bucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: STD21101
+      AccesControl: PublicRead
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: error.html
+    DeletionPolicy: Retain
+  
+  MyBucketSSMParameter:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: /my-s3-bucket/name
+      Type: String
+      Value: !Ref BucketName
+  MyBucketARNSSMParameter:
+    Type: AWS::SSM::Parameter
+    Properties:
+      Name: /my-s3-bucket/arn
+      Type: String
+      Value: !GetAtt MyS3Bucket.Arn
+  
