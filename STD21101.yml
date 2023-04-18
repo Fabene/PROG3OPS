@@ -14,12 +14,6 @@ Resources:
         ErrorDocument: error.html
     DeletionPolicy: Retain
   
-  MyBucketSSMParameter:
-    Type: AWS::SSM::Parameter
-    Properties:
-      Name: /my-s3-bucket/name
-      Type: String
-      Value: !Ref BucketName
   MyBucketARNSSMParameter:
     Type: AWS::SSM::Parameter
     Properties:
